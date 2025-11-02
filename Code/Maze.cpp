@@ -147,10 +147,33 @@ void Maze::display() const
   //LibProfTP2::displayMaze(maze, width, height, CELL_WIDTH);
 }
 void Maze::displayNumberOfDisplacements() const
-{
-  // PROF
+{ 
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            if(maze[h][w] == WALL) 
+            {
+                std::cout << setw(CELL_WIDTH) << "---";
+            }
+            else
+            {
+                int distanceSteps = numberOfDisplacements[h][w];
+                if(distanceSteps == LONG_MAX) 
+                {
+                    std::cout << setw(CELL_WIDTH) << "---";
+                }
+                else
+                {
+                    std::cout << std::setw(CELL_WIDTH) << distanceSteps;
+                }
+            }
+        }
+        std::cout << std::endl;
+    }
+      // PROF
   // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  LibProfTP2::displayNumberOfDisplacements(numberOfDisplacements, width, height, CELL_WIDTH);
+  //LibProfTP2::displayNumberOfDisplacements(numberOfDisplacements, width, height, CELL_WIDTH);
 }
 
 void Maze::recursiveComputeNumberOfDisplacements(int row, int col, int distance)
@@ -183,10 +206,20 @@ void Maze::computeNumberOfDisplacements()
   //LibProfTP2::computeNumberOfDisplacements(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn );
 }
 
+void Maze::recursiveGetPath(int row, int col, Stack& path) const
+{
+    Block block = new Block(endRow)
 
+}
 
 void Maze::getPathToExit(Stack& path) const
 {
+
+    if (numberOfDisplacements[endRow][endColumn] - 1 == numberOfDisplacements[endRow + 1][endColumn])
+    {
+        std::cout << "test" << std::endl;
+    }
+  //path.push()
   // PROF
   // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
   LibProfTP2::getPathToExit(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn, path);
