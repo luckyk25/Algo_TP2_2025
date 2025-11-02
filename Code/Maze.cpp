@@ -208,21 +208,43 @@ void Maze::computeNumberOfDisplacements()
 
 void Maze::recursiveGetPath(int row, int col, Stack& path) const
 {
-    Block block = new Block(endRow)
+    path.push(Block(row, col, maze[row][col]));
+    if (numberOfDisplacements[row][col] == 0) {
+        return; 
+    }
+    int currentDistance = numberOfDisplacements[row][col];
 
+    if (row > 0 && numberOfDisplacements[row - 1][col] == currentDistance - 1)
+    {
+        recursiveGetPath(row - 1, col, path);
+        return;
+    }
+
+    if (row < height - 1 && numberOfDisplacements[row + 1][col] == currentDistance - 1)
+    {
+        recursiveGetPath(row + 1, col, path);
+        return;
+    }
+    if (col > 0 && numberOfDisplacements[row][col - 1] == currentDistance - 1)
+    {
+        recursiveGetPath(row, col - 1, path);
+        return;
+    }
+    if (col < width - 1 && numberOfDisplacements[row][col + 1] == currentDistance - 1)
+    {
+        recursiveGetPath(row, col + 1, path);
+        return;
+    }
 }
 
 void Maze::getPathToExit(Stack& path) const
 {
 
-    if (numberOfDisplacements[endRow][endColumn] - 1 == numberOfDisplacements[endRow + 1][endColumn])
-    {
-        std::cout << "test" << std::endl;
-    }
+   recursiveGetPath(endRow, endColumn, path);
   //path.push()
   // PROF
   // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  LibProfTP2::getPathToExit(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn, path);
+  //LibProfTP2::getPathToExit(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn, path);
 }
 
 void Maze::findAllPoints(Queue& points) const
