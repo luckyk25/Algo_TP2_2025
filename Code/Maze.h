@@ -24,27 +24,11 @@ public:
   void initMaze();
   bool isValid() const;
   
-  
-  
-  
-  // prof
-  // Méthode à coder pour ce travail
-  // Tâche #1a
   void display() const;
-  // Tâche #1b
   void displayNumberOfDisplacements() const;
-
-  // Tâche #2
   void computeNumberOfDisplacements();
-
-  // Tâche #3
   void getPathToExit(Stack& path) const;
-
-  // Tâche #4
   void findAllPoints(Queue& points)const;
-
-
-
 
 private:
   void recursiveComputeNumberOfDisplacements(int row, int col, int distance);

@@ -39,7 +39,6 @@ Stack::~Stack()
 
 bool Stack::operator==(const Stack& Stack) const
 {
-  //TODO : Surcharge de l'op�rateur == selon les sp�cifications
   const Node* current = getFirstNode();
   const Node* otherCurrent = Stack.getFirstNode();
   while (current != nullptr && otherCurrent != nullptr)

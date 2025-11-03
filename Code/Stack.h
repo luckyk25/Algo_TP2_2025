@@ -11,7 +11,7 @@ public:
   ~Stack();
   bool operator==(const Stack& stack) const;
   const Content& top() const;
-  void push(const Content& book);
+  void push(const Content& content);
   void pop();
   void clear();
   void display() const override;

@@ -50,7 +50,6 @@ void Maze::parseFromMemory(std::string mazeContent)
   std::istringstream is(mazeContent);
   char c;
   is >> width >> height;
-  // Espace après la hauteur
   is.get(c);
   initMaze();
 
@@ -133,8 +132,7 @@ void Maze::initMaze()
 #pragma region Code à produire
 void Maze::display() const
 {
-  // PROF
-  // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
+
   for(int i = 0; i < height; i++) 
   {
     for(int k = 0; k < width; k++) 
@@ -144,7 +142,6 @@ void Maze::display() const
     std::cout << std::endl;
   }
   
-  //LibProfTP2::displayMaze(maze, width, height, CELL_WIDTH);
 }
 void Maze::displayNumberOfDisplacements() const
 { 
@@ -171,9 +168,7 @@ void Maze::displayNumberOfDisplacements() const
         }
         std::cout << std::endl;
     }
-      // PROF
-  // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  //LibProfTP2::displayNumberOfDisplacements(numberOfDisplacements, width, height, CELL_WIDTH);
+
 }
 
 void Maze::recursiveComputeNumberOfDisplacements(int row, int col, int distance)
@@ -183,10 +178,11 @@ void Maze::recursiveComputeNumberOfDisplacements(int row, int col, int distance)
     if(this->numberOfDisplacements[row][col] <= distance) { return; }
     numberOfDisplacements[row][col] = distance;
 
-    recursiveComputeNumberOfDisplacements(row - 1, col, distance + 1);
-    recursiveComputeNumberOfDisplacements(row + 1, col, distance + 1);
-    recursiveComputeNumberOfDisplacements(row, col - 1, distance + 1);
-    recursiveComputeNumberOfDisplacements(row, col + 1, distance + 1);
+    distance++;
+    recursiveComputeNumberOfDisplacements(row - 1, col, distance);
+    recursiveComputeNumberOfDisplacements(row + 1, col, distance);
+    recursiveComputeNumberOfDisplacements(row, col - 1, distance);
+    recursiveComputeNumberOfDisplacements(row, col + 1, distance);
 }
 
 void Maze::computeNumberOfDisplacements()
@@ -200,10 +196,6 @@ void Maze::computeNumberOfDisplacements()
     }
 
     recursiveComputeNumberOfDisplacements(startRow, startColumn, 0);
-    //int start = numberOfDisplacements[startColumn][startRow];
-  // PROF
-  // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  //LibProfTP2::computeNumberOfDisplacements(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn );
 }
 
 void Maze::recursiveGetPath(int row, int col, Stack& path) const
@@ -240,9 +232,6 @@ void Maze::recursiveGetPath(int row, int col, Stack& path) const
 void Maze::getPathToExit(Stack& path) const
 {
    recursiveGetPath(endRow, endColumn, path);
-  // PROF
-  // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  //LibProfTP2::getPathToExit(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn, path);
 }
 
 void Maze::recusriveFindAllPoints(int row, int col, Queue& points) const 
@@ -251,8 +240,7 @@ void Maze::recusriveFindAllPoints(int row, int col, Queue& points) const
         return;
     }
     if (numberOfDisplacements[row][col] < 0) { return; }
-
-    
+ 
     Block block(row, col, maze[row][col]);
     if (std::isdigit(block.value))
     {
@@ -270,13 +258,5 @@ void Maze::recusriveFindAllPoints(int row, int col, Queue& points) const
 void Maze::findAllPoints(Queue& points) const
 {
   recusriveFindAllPoints(startRow, startColumn, points);
-
-
-  // PROF
-  // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  //LibProfTP2::findAllPoints(maze, width, height, startRow, startColumn, points);
 }
-
-
-
 #pragma endregion
