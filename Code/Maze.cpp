@@ -247,15 +247,34 @@ void Maze::getPathToExit(Stack& path) const
 
 void Maze::recusriveFindAllPoints(int row, int col, Queue& points) const 
 {
+    if (row < 0 || row >= height || col < 0 || col >= width) {
+        return;
+    }
+    if (numberOfDisplacements[row][col] < 0) { return; }
 
+    
+    Block block(row, col, maze[row][col]);
+    if (std::isdigit(block.value))
+    {
+        points.push_back(block);
+    }
+
+    numberOfDisplacements[row][col] = -1;
+
+    recusriveFindAllPoints(row - 1, col, points);
+    recusriveFindAllPoints(row + 1, col, points);
+    recusriveFindAllPoints(row, col - 1, points);
+    recusriveFindAllPoints(row, col + 1, points);
 }
 
 void Maze::findAllPoints(Queue& points) const
 {
-  
+  recusriveFindAllPoints(startRow, startColumn, points);
+
+
   // PROF
   // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
-  LibProfTP2::findAllPoints(maze, width, height, startRow, startColumn, points);
+  //LibProfTP2::findAllPoints(maze, width, height, startRow, startColumn, points);
 }
 
 
