@@ -49,6 +49,7 @@ public:
 private:
   void recursiveComputeNumberOfDisplacements(int row, int col, int distance);
   void recursiveGetPath(int row, int col, Stack& path) const;
+  void recusriveFindAllPoints(int row, int col, Queue& points) const;
   int width;
   int height;
   char** maze;

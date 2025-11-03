@@ -239,16 +239,20 @@ void Maze::recursiveGetPath(int row, int col, Stack& path) const
 
 void Maze::getPathToExit(Stack& path) const
 {
-
    recursiveGetPath(endRow, endColumn, path);
-  //path.push()
   // PROF
   // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
   //LibProfTP2::getPathToExit(numberOfDisplacements, maze, width, height, startRow, startColumn,endRow, endColumn, path);
 }
 
+void Maze::recusriveFindAllPoints(int row, int col, Queue& points) const 
+{
+
+}
+
 void Maze::findAllPoints(Queue& points) const
 {
+  
   // PROF
   // A METTRE EN COMMENTAIRES ET REMPLACER PAR LE CODE ADEQUAT
   LibProfTP2::findAllPoints(maze, width, height, startRow, startColumn, points);
